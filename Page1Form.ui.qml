@@ -5,6 +5,16 @@ import QtQuick.Window 2.12
 Page {
     width: Screen.width
     height: Screen.height
+    property alias statefield: statefield
+    property alias sno: sno
+    property alias tumbler: tumbler
+    property alias email: email
+    property alias country: country
+    property alias whatsapp: whatsapp
+    property alias phonenofield: phonenofield
+    property alias districtfield: districtfield
+    property alias namefield: namefield
+    visible: true
     property alias button: button
     transformOrigin: Item.Right
     wheelEnabled: true
@@ -14,6 +24,12 @@ Page {
     header: Label {
         font.pixelSize: Qt.application.font.pixelSize * 2
         padding: 10
+    }
+
+    Rectangle {
+        id: rectangle
+        anchors.topMargin: -50
+        anchors.fill: parent
     }
 
     GroupBox {
@@ -36,18 +52,17 @@ Page {
 
             TextField {
                 focus: true
-                id: textField
+                id: namefield
             }
 
             TextField {
                 focus: true
-                id: textField1
-                text: qsTr("India")
+                id: districtfield
             }
 
             TextField {
                 focus: true
-                id: textField2
+                id: statefield
                 text: qsTr("Kerala")
             }
         }
@@ -70,7 +85,7 @@ Page {
             Label {
 
                 id: label1
-                text: qsTr("Country")
+                text: qsTr("District")
                 font.pointSize: 23
             }
 
@@ -89,7 +104,7 @@ Page {
 
             TextField {
                 focus: true
-                id: textField3
+                id: phonenofield
                 width: 330
                 scale: 1
             }
@@ -102,20 +117,21 @@ Page {
 
             TextField {
                 focus: true
-                id: textField4
+                id: whatsapp
                 width: 330
                 scale: 1
             }
 
             Label {
                 id: label6
-                text: qsTr("District")
+                text: qsTr("Country")
                 font.pointSize: 23
             }
 
             TextField {
-                id: textField5
+                id: country
                 width: 330
+                text: "India"
                 focus: true
                 scale: 1
             }
@@ -127,7 +143,7 @@ Page {
             }
 
             TextField {
-                id: textField6
+                id: email
                 width: 330
                 focus: true
                 scale: 1
@@ -425,7 +441,7 @@ Page {
             }
 
             TextInput {
-                id: textInput
+                id: sno
                 width: 212
                 height: 38
                 color: "#a40a0a"
@@ -449,10 +465,14 @@ Page {
         }
     }
 
+
+
     Connections {
         target: checkDelegate1
         onClicked: print("clicked")
     }
+
+
 
 
 

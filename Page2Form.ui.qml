@@ -7,6 +7,9 @@ Page {
 
     width: Screen.width
     height: Screen.height
+    property alias districtf: districtf
+    property alias roundButton: roundButton
+    property alias listView: listView
     property alias columnSpacing: column.spacing
     transformOrigin: Item.Center
     wheelEnabled: true
@@ -44,9 +47,11 @@ Page {
                 id: column
                 width: 300
                 height: row.height
+                anchors.left: parent.left
+                anchors.leftMargin: 0
 
                 TextField {
-                    id: textField
+                    id: districtf
                     width: 250
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
@@ -59,12 +64,16 @@ Page {
                 id: column1
                 width: 300
                 height: row.height
+                anchors.right: parent.right
+                anchors.rightMargin: 2
 
                 RoundButton {
                     id: roundButton
                     width: 102
                     height: 44
                     text: "Search"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
                     anchors.verticalCenter: parent.verticalCenter
                     font.pointSize: 20
                     highlighted: false
@@ -83,14 +92,64 @@ Page {
             anchors.topMargin: 200
             anchors.fill: parent
             ListView {
-                   model: 20
+                id: listView
+                model: myobject.val
+                maximumFlickVelocity: 500
+                boundsBehavior: Flickable.StopAtBounds
+
+
                    delegate: ItemDelegate {
-                       text: "Item " + index
+                       id:itemdelegate
+
+                       MouseArea {
+                           id: outerrect
+                           width: parent.width
+                           height: 30
+
+                           Rectangle
+                           {
+                           color: "#ffffff"
+                           width: parent.width
+                           height: parent.height
+                           radius: 2
+                           clip: true
+
+                           Rectangle {
+                             width: parent.width
+                             height: parent.height
+                             anchors.left: parent.left
+                             color: "#f22613"
+                             visible: listview.isCurrentItem ? true : false
+                             opacity: 0.1
+                             radius: 3
+                           }
+
+                           Text {
+                               id: itexItem
+                               anchors.left: parent.left
+                               anchors.leftMargin: 5
+                               anchors.verticalCenter: parent.verticalCenter
+                               font.pixelSize: 20
+                               text: modelData
+                               color: "black"
+                               opacity: 1
+                           }
+
+                          Rectangle {
+                             width: 2
+                             height: parent.height
+                             anchors.left: parent.left
+                             color: "#f22613"
+                             visible: listview.isCurrentItem ? true : false
+                           }
+                       }
+
                    }
             }
 
         }
 
+    }
     }
     Image {
         id: image

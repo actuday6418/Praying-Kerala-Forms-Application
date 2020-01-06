@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include<QQmlApplicationEngine>
 #include "myobject.h"
+#include<QQuickView>
+#include<QQmlContext>
 
 
 
@@ -8,11 +10,10 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+    qmlRegisterType<MyObject>("io.qt.examples.MyObject", 1, 0, "MyObject");
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    qmlRegisterType<MyObject>("io.qt.examples.MyObject", 1, 0, "MyObject");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    return app.exec();
+
+       return app.exec();
 }
 
