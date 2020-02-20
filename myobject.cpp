@@ -74,7 +74,7 @@ bool createConnections()
     QSqlDatabase DB = QSqlDatabase::addDatabase("QSQLITE");
     DB.setDatabaseName( "PKDB" );
     DB.setUserName( "PolyAniline" );
-    DB.setPassword( "JesusChrist8456" );
+    DB.setPassword("Password" );
     DB.setHostName( "PUTER" );
     if ( ! DB.open())
     {
